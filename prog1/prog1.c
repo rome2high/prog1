@@ -25,7 +25,7 @@ void read_int(int list[], int max_size, int *arrElements)
 		scanf( "%d", &num );
 		if(num <= 0)
 		{
-			*arrElements = *arrElements + i;
+			*arrElements = i;
 			return;
 		}
 		// else continued
@@ -38,8 +38,9 @@ void read_int(int list[], int max_size, int *arrElements)
  * prints a list of integers.
  * parameter: list - the array
  * parameter: size - size of the array
+ * return: 1 if true, else 0
  */
-void print_integers(int list[], int size)
+int print_integers(int list[], int size)
 {
     int i;
 	int j = size/2;	//start index of second sequence
@@ -87,6 +88,39 @@ void print_integers(int list[], int size)
     printf ( "Hot Stuff \n" );
 }
 
+int check_Sequences(int list[], int size)
+{
+	int i;
+	int j;
+	int retVal;
+
+	retVal = 1;
+	for ( i = 0; i < size/2; i++ )
+    {
+		//second sequence start index
+		j = i + size/2;
+
+		if ( list[i] <= list[i+1])
+		{
+			retVal++;
+			if( list[j] <= list[j+1])
+			{
+				retVal--;
+			}
+		}
+		else if( list[i] > list[i+1] )
+		{
+			retVal++;
+			if ( list[j] > list[j+1] )
+			{
+				retVal--;
+			}
+		}
+    }
+
+	return retVal;
+}
+
 /*
  * Program execution begins from here.
  * parameters: none
@@ -95,17 +129,32 @@ int main()
 {
     int list[100];
 	int max_size = 100;
-	int arrElements = 0;
+	int arrElements;
+	
+	arrElements = 0;
 
-    printf( "Enter a list of integers separete by spaces: " );
+   
+
 
 	//call a by-reference functiong using operator & to change value of arrElements
-	read_int( list, max_size, &arrElements);
-	//printf("Array size %d", arrElements);
+	while (arrElements < 4) {
+		printf( "Enter a list of 4 or more integers separete by spaces and end with 0:\n" );
+		read_int( list, max_size, &arrElements);
+	}
 
-    print_integers( list, arrElements);
-
-	scanf( "%d", &max_size );
+	if(check_Sequences(list,arrElements) == 1)
+	{
+		printf( "[MATCH] Two sequences are order equivalent\n" );
+	}
+	else
+	{
+		printf( "[UNMATCH] Two sequences are NOT order equivalent\n" );
+	}
+	
+	printf( "Enter a number and hit ENTER to exit the program\n" );
+	scanf( "%d", &arrElements );
+    
+	return 0;
 }
 
 
