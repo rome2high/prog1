@@ -59,7 +59,7 @@ int print_integers(int list[], int size)
 			else
 			{
 				printf( "Sequences are not match");
-				return;
+				return 0;
 			}
 		}
 		else if( list[i] > list[i+1] )
@@ -73,32 +73,35 @@ int print_integers(int list[], int size)
 			else
 			{
 				printf( "Sequences are not match");
-				return;
+				return 0;
 			}
 		}
 		else 
 		{
 			printf( "Sequences are not match");
-			return;
+			return 0;
 		}
 
         //printf( "%d ", list[i] );
+		return 0;
     }
 
     printf ( "Hot Stuff \n" );
+	return 1;
 }
 
-int check_Sequences(int list[], int size)
+int check_Sequences(int list[], int totalNumEnter)
 {
 	int i;
 	int j;
 	int retVal;
 
 	retVal = 1;
-	for ( i = 0; i < size/2; i++ )
+
+	for ( i = 0; i < totalNumEnter/2; i++ )
     {
 		//second sequence start index
-		j = i + size/2;
+		j = i + totalNumEnter/2;
 
 		if ( list[i] <= list[i+1])
 		{
@@ -121,6 +124,36 @@ int check_Sequences(int list[], int size)
 	return retVal;
 }
 
+int check_Sequences_2(int list[], int totalNumEnter)
+{
+	int i;
+	int j;
+	int retVal;
+
+	retVal = 1;
+
+	for ( i = 0; i < totalNumEnter/2; i++ )
+    {
+		//second sequence start index
+		j = i + totalNumEnter/2;
+
+		if ( list[i] <= list[i+1])
+		{
+			retVal++;
+		}
+		if( list[j] <= list[j+1])
+		{
+			retVal--;
+		}
+		if(retVal != 1)
+		{
+			return retVal;
+		}
+    }
+
+	return retVal;
+}
+
 /*
  * Program execution begins from here.
  * parameters: none
@@ -129,20 +162,21 @@ int main()
 {
     int list[100];
 	int max_size = 100;
-	int arrElements;
+	int totalNumEnter;
 	
-	arrElements = 0;
-
-   
+	totalNumEnter = 0;
 
 
 	//call a by-reference functiong using operator & to change value of arrElements
-	while (arrElements < 4) {
-		printf( "Enter a list of 4 or more integers separete by spaces and end with 0:\n" );
-		read_int( list, max_size, &arrElements);
-	}
+	//while (totalNumEnter < 4) {
+	//	printf( "Enter a list of 4 or more integers separete by spaces and end with 0:\n" );
+	//	read_int( list, max_size, &totalNumEnter);
+	//}
 
-	if(check_Sequences(list,arrElements) == 1)
+	printf( "Enter a list of 4 or more integers separete by spaces and end with 0:\n" );
+	read_int( list, max_size, &totalNumEnter);
+
+	if(check_Sequences_2(list,totalNumEnter) == 1)
 	{
 		printf( "[MATCH] Two sequences are order equivalent\n" );
 	}
@@ -152,7 +186,7 @@ int main()
 	}
 	
 	printf( "Enter a number and hit ENTER to exit the program\n" );
-	scanf( "%d", &arrElements );
+	scanf( "%d", &totalNumEnter );
     
 	return 0;
 }
