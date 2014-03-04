@@ -8,6 +8,7 @@
  */
 
 #include <stdio.h>
+#include <string.h>
 
 /*
  * reads a list of integers from the keyboard into an array.
@@ -15,7 +16,7 @@
  * parameter: max_size - maximum size of the array
  * parameter: *arrElements - number of elements in the list array
  */
-void read_int_p1(int list[], int max_size, int *arrElements)
+void read_int(int list[], int max_size, int *arrElements)
 {
 	int i = 0;
 	int num;
@@ -40,7 +41,7 @@ void read_int_p1(int list[], int max_size, int *arrElements)
  * parameter: size - size of the array
  * return: 1 if true, else 0
  */
-int print_integers_p1(int list[], int size)
+int print_integers(int list[], int size)
 {
     int i;
 	int j = size/2;	//start index of second sequence
@@ -90,7 +91,7 @@ int print_integers_p1(int list[], int size)
 	return 1;
 }
 
-int check_Sequences_p1(int list[], int totalNumEnter)
+int check_Sequences(int list[], int totalNumEnter)
 {
 	int i;
 	int j;
@@ -124,7 +125,7 @@ int check_Sequences_p1(int list[], int totalNumEnter)
 	return retVal;
 }
 
-int check_Sequences_2_p1(int list[], int totalNumEnter)
+int check_Sequences_2(int list[], int totalNumEnter)
 {
 	int i;
 	int j;
@@ -154,17 +155,82 @@ int check_Sequences_2_p1(int list[], int totalNumEnter)
 	return retVal;
 }
 
+void read_str(char sortDir[], int str_maxSize)
+{
+	char s[2];// = "Upupup";
+	char s1[] = "##";
+
+	int i = 0;
+	int sLen;
+
+	scanf( "%s", s );
+	printf( "s = %s \n", s );
+
+	sLen = strlen(s);
+
+	for(i = 0; i< sLen;i++)
+	{
+		s1[i] = tolower(s[i]);
+	}
+
+	//*s1 = tolower(*s1);
+	printf( "s1 = %s \n", s1 );
+
+	strcpy(sortDir, s);
+
+	printf( "sortDir = %s\n", sortDir);
+
+
+	//char str[] = "Hello";
+	//char *str2;
+	//printf("str : %s \n", str);
+	//str2 = &str[0]; //now, str2 can be used anywhere str is expected
+	//printf("str2 : %s \n", str2);
+	//str2 = str; //most commonly used
+	//printf("str2 : %s \n", str2);
+	
+	return;
+}
+
 /*
  * Program execution begins from here.
  * parameters: none
  */
-int main_p1()
+int main()
 {
     int list[100];
 	int max_size = 100;
 	int totalNumEnter;
 	
+	char sortDir[2];
+	int str_maxSize;
+
+
+	char str1[]="UPUPUP";
+	char str2[]="upupup";
+
+	int i = 0;
+
+	//*str1 = tolower(*str1);
+
+	for(i = 0; i<6; i++)
+	{
+		str1[i] = tolower(str1[i]);
+	}
+
+	if(strcmp(str1,str2) == 0)
+	{
+		printf("str1 and str2 are identical. \n");
+	}
+
+	
+	
+	str_maxSize = 2;
 	totalNumEnter = 0;
+
+	read_str(sortDir, str_maxSize);
+
+	printf("input: %s", sortDir);
 
 
 	//call a by-reference functiong using operator & to change value of arrElements
@@ -174,9 +240,9 @@ int main_p1()
 	//}
 
 	printf( "Enter a list of 4 or more integers separete by spaces and end with 0:\n" );
-	read_int_p1( list, max_size, &totalNumEnter);
+	read_int( list, max_size, &totalNumEnter);
 
-	if(check_Sequences_p1(list,totalNumEnter) == 1)
+	if(check_Sequences_2(list,totalNumEnter) == 1)
 	{
 		printf( "[MATCH] Two sequences are order equivalent\n" );
 	}

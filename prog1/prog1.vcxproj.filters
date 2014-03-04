@@ -18,5 +18,8 @@
     <ClCompile Include="prog1.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="prog2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
