@@ -78,6 +78,7 @@
   <ItemGroup>
     <ClCompile Include="prog1.c" />
     <ClCompile Include="prog2.c" />
+    <ClCompile Include="prog3.c" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

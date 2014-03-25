@@ -18,7 +18,7 @@
  * parameter: max_size - maximum size of the array
  * parameter: *arrElements - number of elements in the list array
  */
-void read_int(int list[], int max_size, int *arrLength)
+void read_int_p2(int list[], int max_size, int *arrLength)
 {
 	int i = 0;
 	int num;
@@ -40,7 +40,7 @@ void read_int(int list[], int max_size, int *arrLength)
  * reads user sort order selection and a list of integers from the keyboard into an array.
  * return: an integer; 1 if ascending, 0 if decending
  */
-int GetSortOrder()
+int GetSortOrder_p2()
 {
 	char strInput[100];
 	char up[] = "up";
@@ -77,7 +77,7 @@ int GetSortOrder()
  * swap the the value of two pointers
  * parameter: *p , *q
  */
-void mySwap(int *p, int *q)
+void mySwap_p2(int *p, int *q)
 {
 	int x;
 	x = *p;
@@ -91,7 +91,7 @@ void mySwap(int *p, int *q)
  * parameter: arrLength - integer array length
  * parameter: isAscending - boolean
  */
-void bubblesort(int list[], int arrLength, int isAscending)
+void bubblesort_p2(int list[], int arrLength, int isAscending)
 {
 	int i, j;
 	int *p, *q;
@@ -126,7 +126,7 @@ void bubblesort(int list[], int arrLength, int isAscending)
  * Program execution begins from here.
  * parameters: none
  */
-int main()
+int main_p2()
 {
 	int list[100];
 	int max_size = 100;
