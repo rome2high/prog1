@@ -106,7 +106,7 @@ void bubblesort_p2(int list[], int arrLength, int isAscending)
 				{
 					p = &list[j-1];
 					q = &list[j];
-					mySwap(p, q);
+					mySwap_p2(p, q);
 				}
 			}
 			else
@@ -115,7 +115,7 @@ void bubblesort_p2(int list[], int arrLength, int isAscending)
 				{
 					p = &list[j-1];
 					q = &list[j];
-					mySwap(p, q);
+					mySwap_p2(p, q);
 				}
 			}
 		}
@@ -139,11 +139,11 @@ int main_p2()
 	while(1)
 	{
 		printf("\n");
-		isAscending = GetSortOrder();
+		isAscending = GetSortOrder_p2();
 		printf("Enter a sequence of numbers (end string with a 0): ");
-		read_int(list, max_size, &arrLength);
+		read_int_p2(list, max_size, &arrLength);
 
-		bubblesort(list, arrLength, isAscending);
+		bubblesort_p2(list, arrLength, isAscending);
 
 		printf("Result: \n");
 		for(i = 0; i < arrLength; i++)
