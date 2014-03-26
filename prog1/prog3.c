@@ -9,14 +9,26 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <ctype.h>
 #include<conio.h>
 
+#define insert  1;
+#define print 2;
+#define exit 3;
+
+
+struct int_node
+{
+	int node;
+	struct int_node *next;
+};
+
 int GetUserInput(char strInput[100])
 {
-	char insert[] = "insert";	// 1
-	char print[] = "print";		// 2
-	char exit[] = "exit";		// 3
+	char c_insert[] = "insert";	// 1
+	char c_print[] = "print";		// 2
+	char c_exit[] = "exit";		// 3
 	int i;
 
 	int _numRequest = 0;
@@ -29,11 +41,11 @@ int GetUserInput(char strInput[100])
 		strInput[i] = tolower(strInput[i]);
 	}
 
-	if(strcmp(strInput,insert) == 0)
+	if(strcmp(strInput, c_insert) == 0)
 		_numRequest = 1;
-	else if (strcmp(strInput, print) == 0)
+	else if (strcmp(strInput, c_print) == 0)
 		_numRequest = 2;
-	else if (strcmp(strInput, exit) == 0)
+	else if (strcmp(strInput, c_exit) == 0)
 		_numRequest = 3;
 
 	return _numRequest;
@@ -41,10 +53,12 @@ int GetUserInput(char strInput[100])
 
 int readint()
 {
+	int i;
 	int num;
 
-	scanf("%d", num);
-
+	scanf("%d", &num);
+	while (fgetc(stdin) != '\n')
+		;
 	return num;
 }
 
@@ -62,32 +76,72 @@ int main()
 	int i;
 	int isAscending;
 
+	
 	char uInput[100];
 	int numRequest;
 	int num;
-	
+
+	struct int_node *root;
+	struct int_node *currNode;
+
+	root = (struct int_node *) malloc( sizeof(struct int_node) );
+	root->next = 0;
+	root->node = 0;
+
 	while(1)
 	{
 		printf("\n");
+		
+		/* by pass next node error*/
+		if(root->next != 0)
+			currNode = root->next;
+		else
+			currNode = root;
+
+		if( currNode != 0)
+		{
+			while ( currNode->next != 0)
+			{
+				/* sort node tree */
+				if(currNode->node > currNode->next->node)
+				{
+					int tmp = currNode->node;
+					currNode->node = currNode->next->node;
+					currNode->next->node = tmp;
+					currNode = root;
+				}
+				else
+				{
+					currNode = currNode->next;
+				}
+			}
+		}
+
 		printf("Enter a request (insert | print | exit) : ");
 		numRequest = GetUserInput(uInput);
 
-		
+		//insert
 		if(numRequest == 1)
 		{
-			//insert
-			printf("Insert block");
-			printf("enter a number: ");
-			
-			num = readint();
-			
-			printf("You entered: %d", num);
+			struct int_node *node;
 
+			printf("enter a number: ");
+			num = readint();
+			node = (struct int_node *) malloc( sizeof( struct int_node) );
+			node->next = 0;
+			node->node = num;
+
+			currNode->next = node; 
 		}
+		//print
 		else if(numRequest == 2)
 		{
-			//print
-			printf("Print block");
+			currNode = root->next;
+			while (currNode != NULL)
+			{
+				printf( "%d ", currNode->node);
+				currNode = currNode->next;
+			}
 		}
 		else if (numRequest == 3)
 		{
@@ -97,24 +151,6 @@ int main()
 		else if(numRequest == 0)
 		{
 			printf("ERROR: unknow request '%s' \n", uInput);
-		}
-
-		//read_int_p2(list, max_size, &arrLength);
-
-		//bubblesort_p2(list, arrLength, isAscending);
-
-		continue;
-
-		printf("Result: \n");
-		for(i = 0; i < arrLength; i++)
-			printf("%d\n", list[i]);
-	
-
-		printf("\nPress 'y' to restart the program or press anything else to exit ... ");
-		ch = getch();
-		if(ch != 'y')
-		{
-			return 1;
 		}
 	}
 	return 1;
